@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "api/v1")
 public class MovieController {
-
-
     MovieService movieService;
 
     @Autowired
@@ -20,34 +20,56 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping("movie")
-    public ResponseEntity<?> saveMovie(@RequestBody Movie movie) {
-        ResponseEntity responseEntity;
+
+    @PostMapping("/saveNewMovie")
+    public ResponseEntity<?> saveNewMovie(@RequestBody Movie movie){
+
         try {
-            movieService.saveMovie(movie);
-            responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
-        } catch (Exception ex) {
-            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+            movieService.saveNewMovie(movie);
+            return new ResponseEntity<Movie>(movie,HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<Movie>(movie,HttpStatus.CONFLICT);
         }
-        return responseEntity;
     }
 
-    @GetMapping("movie")
-    public ResponseEntity<?> getAllMovies() {
-        return new ResponseEntity<List<Movie>>(movieService.getAllMovies(), HttpStatus.OK);
+    @GetMapping("/getAllMovies")
+    public ResponseEntity<?> getAllMovies(){
+        return new ResponseEntity<Iterable<Movie>>(movieService.getAllMovie(),HttpStatus.OK);
     }
 
-    @PutMapping("movie")
-    public ResponseEntity<?> updateMovie(@RequestBody Movie movie) {
-        ResponseEntity responseEntity;
-        try {
-            movieService.saveMovie(movie);
-            responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
-        } catch (Exception ex) {
-            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+    @GetMapping("/movie/{id}")
+    public ResponseEntity<?> getById(@PathVariable int id){
+        Optional<Movie> movies;
+        try{
+            movies = movieService.getById(id);
+            return new ResponseEntity<Optional<Movie>>(movies,HttpStatus.OK);
+        }catch (Exception e){
+
+            return new ResponseEntity<String>("No such movie found",HttpStatus.CONFLICT);
         }
-        return responseEntity;
     }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<?>  deleteById(@RequestBody Movie movie,@PathVariable int id){
+        try{
+            movieService.deleteById(id);
+            return new ResponseEntity<Movie>(movie,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>("Cannot be deleted beacause movie doesn't exist",HttpStatus.CONFLICT);
+        }
+
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateById(@RequestBody Movie movie, @PathVariable int id){
+        try {
+            movieService.updateById(movie, id);
+            return new ResponseEntity<>(movieService.updateById(movie,id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
+        }
+
+    }
+
 
 }
-
