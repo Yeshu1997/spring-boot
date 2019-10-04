@@ -1,7 +1,7 @@
-package com.stackroute.movie.service;
+package com.stackroute.MovieApp.service;
 
-import com.stackroute.movie.domain.Movie;
-import com.stackroute.movie.repository.MovieRepository;
+import com.stackroute.MovieApp.domain.Movie;
+import com.stackroute.MovieApp.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

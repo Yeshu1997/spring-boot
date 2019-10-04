@@ -1,7 +1,6 @@
-package com.stackroute.movie.service;
+package com.stackroute.MovieApp.service;
 
-import com.stackroute.movie.domain.Movie;
-import com.stackroute.movie.domain.Movie;
+import com.stackroute.MovieApp.domain.Movie;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

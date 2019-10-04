@@ -1,4 +1,4 @@
-package com.stackroute.movie.AppConfig;
+package com.stackroute.MovieApp.AppConfig;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
