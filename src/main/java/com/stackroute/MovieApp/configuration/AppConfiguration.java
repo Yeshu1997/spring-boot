@@ -1,4 +1,4 @@
-package com.stackroute.MovieApp.AppConfig;
+package com.stackroute.MovieApp.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
