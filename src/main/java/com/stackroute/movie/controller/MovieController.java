@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "api/v1")
 public class MovieController {
-    MovieService movieService;
+   private MovieService movieService;
 
     @Autowired
     public MovieController(MovieService movieService) {
@@ -69,6 +69,11 @@ public class MovieController {
             return new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
         }
 
+    }
+    @GetMapping("/titles/{title}")
+    public ResponseEntity<List<Movie>> getByName(@RequestParam   String title) {
+        List<Movie> movie = movieService.getByName(title);
+        return new ResponseEntity<List<Movie>>(movie, HttpStatus.OK);
     }
 
 
