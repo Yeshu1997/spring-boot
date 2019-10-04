@@ -1,8 +1,5 @@
-package com.stackroute.movie.AppConfig;
+package com.stackroute.MovieApp.AppConfig;
 
-import com.google.common.base.Predicate;
-import org.h2.server.web.WebServlet;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
