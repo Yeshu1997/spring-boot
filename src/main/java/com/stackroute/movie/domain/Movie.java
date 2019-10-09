@@ -1,57 +1,73 @@
 package com.stackroute.movie.domain;
 
+import lombok.*;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Entity
+@Data
+@Builder
 public class Movie {
     @Id
-    @GeneratedValue
-    private  int movieId;
+    private int id;
+    private String title;
+    private String release_date;
 
-    private  String movieName;
-    private String movieType;
+    public Movie(int id, String title, String release_date, String overview, int revenue) {
+        this.id = id;
+        this.title = title;
+        this.release_date = release_date;
+        this.overview = overview;
+        this.revenue = revenue;
+    }
 
     public Movie() {
     }
 
-    public Movie(int movieId, String movieName, String movieType) {
-        this.movieId = movieId;
-        this.movieName = movieName;
-        this.movieType = movieType;
+    public int getId() {
+        return id;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public String getTitle() {
+        return title;
     }
 
-    public String getMovieName() {
-        return movieName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public String getMovieType() {
-        return movieType;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
-    public void setMovieType(String movieType) {
-        this.movieType = movieType;
+    public String getOverview() {
+        return overview;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieId=" + movieId +
-                ", movieName='" + movieName + '\'' +
-                ", movieType='" + movieType + '\'' +
-                '}';
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
+
+    public int getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(int revenue) {
+        this.revenue = revenue;
+    }
+
+    private String overview;
+    private int revenue;
+
+
 }
