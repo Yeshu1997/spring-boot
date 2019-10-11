@@ -1,30 +1,22 @@
 package com.stackroute.movie.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-
-@Entity
 @Data
+@Document(value = "Movie")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Movie {
+
     @Id
     private int id;
     private String title;
-    private String release_date;
-
-    public Movie(int id, String title, String release_date, String overview, int revenue) {
-        this.id = id;
-        this.title = title;
-        this.release_date = release_date;
-        this.overview = overview;
-        this.revenue = revenue;
-    }
-
-    public Movie() {
-    }
 
     public int getId() {
         return id;
@@ -66,8 +58,13 @@ public class Movie {
         this.revenue = revenue;
     }
 
+    private String release_date;
     private String overview;
     private int revenue;
+
+    public Movie(int id, String title, String release_date) {
+    }
+
 
 
 }

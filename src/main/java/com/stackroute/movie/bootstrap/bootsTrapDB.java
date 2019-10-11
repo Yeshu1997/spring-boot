@@ -4,7 +4,7 @@ import com.stackroute.movie.domain.Movie;
 import com.stackroute.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Configuration;
+//import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,7 @@ public class bootsTrapDB implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     public bootsTrapDB(MovieRepository movieRepository) {
+
         this.movieRepository = movieRepository;
     }
 

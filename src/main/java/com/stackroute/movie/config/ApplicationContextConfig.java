@@ -1,4 +1,4 @@
-package com.stackroute.movie.AppConfig;
+package com.stackroute.movie.config;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

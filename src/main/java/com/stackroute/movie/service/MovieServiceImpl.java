@@ -4,37 +4,37 @@ import com.stackroute.movie.domain.Movie;
 import com.stackroute.movie.exception.MovieAlreadyExistsException;
 import com.stackroute.movie.exception.MovieNotFoundException;
 import com.stackroute.movie.repository.MovieRepository;
-import com.stackroute.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service()
+@Service
 @Primary
-public class MovieServiceImpl implements MovieService,  CommandLineRunner {
+public class MovieServiceImpl implements MovieService {
 
     MovieRepository movieRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository){
-        super();
+    public MovieServiceImpl(MovieRepository movieRepository) {
+//    super();
         this.movieRepository = movieRepository;
     }
 
     @Override
     public Movie saveNewMovie(Movie movie) throws MovieAlreadyExistsException {
-        if(movieRepository.existsById(movie.getId())){
+        if (movieRepository.existsById(movie.getId())) {
             throw new MovieAlreadyExistsException("Movie Already Exists");
         }
         Movie savedMovie = movieRepository.save(movie);
-        if (savedMovie == null){
+        if (savedMovie == null) {
             throw new MovieAlreadyExistsException("Movie already exists");
         }
         return savedMovie;
@@ -48,17 +48,17 @@ public class MovieServiceImpl implements MovieService,  CommandLineRunner {
     @Override
     public Optional<Movie> getById(int id) throws MovieNotFoundException {
         Optional<Movie> movieId = movieRepository.findById(id);
-        if (movieId.isPresent()){
+        if (movieId.isPresent()) {
             return movieId;
-        }else {
+        } else {
             throw new MovieNotFoundException("Movie Not Found");
         }
     }
 
     @Override
-    public boolean deleteById(int id) throws MovieNotFoundException{
+    public boolean deleteById(int id) throws MovieNotFoundException {
         Optional<Movie> movieId = movieRepository.findById(id);
-        if (movieId.isEmpty()){
+        if (movieId.isEmpty()) {
             throw new MovieNotFoundException("Movie not found");
         }
         movieRepository.deleteById(id);
@@ -69,7 +69,7 @@ public class MovieServiceImpl implements MovieService,  CommandLineRunner {
     @Override
     public Movie updateById(Movie movie, int id) throws MovieNotFoundException {
         Optional<Movie> userOptional = movieRepository.findById(id);
-        if(userOptional.isEmpty()){
+        if (userOptional.isEmpty()) {
             throw new MovieNotFoundException("Movie not found!");
         }
         movie.setId(id);
@@ -79,14 +79,8 @@ public class MovieServiceImpl implements MovieService,  CommandLineRunner {
 
     @Override
     public List<Movie> getByName(String title) {
-        List<Movie> id = movieRepository.findTitleByName(title);
+        List<Movie> id = movieRepository.findMovieByTitle(title);
         return id;
-    }
-
-
-    @Override
-    public void run(String... args) throws Exception {
-
     }
 
 
